@@ -129,14 +129,12 @@
           this.$get = [
               '$rootScope',
               '$window',
-              '$log',
               '$timeout',
               '$document',
 
               function(
                   $rootScope,
                   $window,
-                  $log,
                   $timeout,
                   $document
               ){
@@ -148,7 +146,7 @@
                 // #9: Assign a placeholder object if Web Storage is unavailable to prevent breaking the entire AngularJS app
                 // Note: recheck mainly for testing (so we can use $window[storageType] rather than window[storageType])
                 var isSupported = isStorageSupported($window, storageType),
-                    webStorage = isSupported || ($log.warn('This browser does not support Web Storage!'), {setItem: angular.noop, getItem: angular.noop, removeItem: angular.noop}),
+                    webStorage = isSupported || (console.warn('This browser does not support Web Storage!'), {setItem: angular.noop, getItem: angular.noop, removeItem: angular.noop}),
                     $storage = {
                         $default: function(items) {
                             for (var k in items) {
